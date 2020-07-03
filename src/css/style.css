@@ -1,0 +1,13 @@
+.button {
+	width: 200px;
+	height: 32px;
+}
+
+.home {
+	background-color: blue;
+	width: 32px;
+}
+
+.shopping {
+	background-color: red;
+}
