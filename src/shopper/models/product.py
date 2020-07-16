@@ -8,6 +8,6 @@ class ProductType(BaseModel):
 
 class Product(BaseModel):
 	id = IntegerField(primary_key = True, unique = True)
-	type = ForeignKeyField(ProductType, null = True, default=None)
+	type = ForeignKeyField(ProductType, column_name = "type", null = True, default=None)
 	name = TextField()
 	visible = BooleanField(default = True)

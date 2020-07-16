@@ -59,7 +59,7 @@ async def list_type(id: int):
 
 @router.get("/")
 async def list_products():
-	return [i for i in Product.select(Product.visible).dicts()]
+	return [i for i in Product.select().where(Product.visible).dicts()]
 
 @router.get("/{id}")
 async def list_product(id: int):

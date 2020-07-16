@@ -38,7 +38,7 @@ $bg: rgba(255, 255, 255, 0.075);
 				height: 30px;
 			}
 
-			.active{
+			&.active{
 				background-color: $bg;
 			}
 		}

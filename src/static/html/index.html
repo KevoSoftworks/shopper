@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<header-wrapper v-bind:buttons="buttons" @press="setPage"></header-wrapper>
+			<header-wrapper :buttons="buttons" @press="setPage"></header-wrapper>
 			<div class="card" v-show="activePage == 'home'">
 				<h3>Home</h3>
 				<div class="content">
@@ -25,20 +25,24 @@
 			<div class="card" v-show="activePage == 'product'">
 				<h3>Products</h3>
 				<nav>
-					<li @click="activeSection = 'products'">Products</li>
-					<li @click="activeSection = 'types'">Categories</li>
+					<li :class="{active: activeSection == 'products'}" @click="activeSection = 'products'">Products</li>
+					<li :class="{active: activeSection == 'types'}" @click="activeSection = 'types'">Categories</li>
 				</nav>
 				<section id="products" class="content" v-show="activeSection == 'products'">
+					<button @click="newProductDialog">New product</button>
 					<ul>
-						<li v-for="product in products">{{ product.name }}</li>
+						<li v-for="product in products">{{ product.name }} - {{ product_types[product.type].name }}</li>
 					</ul>
 				</section>
 				<section id="categories" class="content" v-show="activeSection == 'types'">
+					<button @click="newProductTypeDialog">New type</button>
 					<ul>
 						<li v-for="type in product_types">{{ type.name }}</li>
 					</ul>
 				</section>
 			</div>
+
+			<new-product-dialog v-bind:visible="dialogVisible == 'new-product-dialog'" @close-dialog="closeDialog" @update="update"></new-product-dialog>
 		</div>
 	</body>
 </html>
