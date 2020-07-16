@@ -74,7 +74,7 @@ async def create_product(product: CreateProduct):
 
 @router.delete("/")
 async def delete_product(product: Deletable):
-	delete_product = Product.get(Product.id = product.id)
+	delete_product = Product.get(Product.id == product.id)
 	delete_product.visible = False
 	delete_product.save()
 

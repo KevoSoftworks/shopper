@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN rm requirements.txt
 
-CMD [ "uvicorn", "--host", "0.0.0.0", "shopper.main:web" ]
+CMD [ "uvicorn", "--host", "0.0.0.0", "shopper.main:web", "--reload" ]

@@ -4,15 +4,22 @@
 		<script src="js/vue_2_6_11_dev.js"></script>
 		<script type="module" src="js/app.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	</head>
 	<body>
 		<div id="wrapper">
-			<h3>This is a header</h3>
-			<p>
-				Wow a paragraph! How awesome!!!
-			</p>
-			<header-wrapper v-bind:buttons="buttons"></header-wrapper>
+			<header-wrapper v-bind:buttons="buttons" @press="setPage"></header-wrapper>
+			<div class="card" v-if="activePage == 'home'">
+				<h3>Home</h3>
+			</div>
+			<div class="card" v-if="activePage == 'cart'">
+				<h3>Shopping Cart</h3>
+			</div>
+			<div class="card" v-if="activePage == 'calendar'">
+				<h3>Calendar</h3>
+			</div>
+			<div class="card" v-if="activePage == 'product'">
+				<h3>Products</h3>
+			</div>
 		</div>
 	</body>
 </html>

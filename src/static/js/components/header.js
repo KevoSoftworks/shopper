@@ -11,6 +11,7 @@ export default {
 				v-for="button in buttons"
 				:key="button.id"
 				:button="button"
+				v-on="$listeners"
 			></header-button>
 		</div>
 	`
