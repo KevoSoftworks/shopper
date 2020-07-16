@@ -1,0 +1,46 @@
+@use "base";
+
+$bg: rgba(255, 255, 255, 0.075);
+
+.card{
+	background-color: $bg;
+	border-radius: 4px;
+	margin-top: 32px;
+
+	h3{
+		@include base.reset;
+		padding: 6px 24px;
+		background-color: $bg;
+		font-size: 24px;
+		border-bottom: 1px solid base.$bgAltColour;
+	}
+
+	.content{
+		padding: 12px 48px;
+	}
+
+	nav{
+		background-color: $bg;
+		text-align: center;
+
+		li {
+			display: inline-block;
+			height: 32px;
+			min-width: 20%;
+			line-height: 32px;
+			padding: 2px 12px;
+			cursor: pointer;
+
+			transition: border-bottom 0.1s ease-in-out;
+
+			&:hover{
+				border-bottom: 2px solid base.$bgAltColour;
+				height: 30px;
+			}
+
+			.active{
+				background-color: $bg;
+			}
+		}
+	}
+}

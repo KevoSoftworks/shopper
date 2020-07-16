@@ -3,7 +3,8 @@
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("/assets/font/MaterialIcons-Regular.woff2") format("woff2"), url("/assets/font/MaterialIcons-Regular.woff") format("woff"), url("/assets/font/MaterialIcons-Regular.ttf") format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("/assets/font/MaterialIcons-Regular.woff2") format("woff2"), url("/assets/font/MaterialIcons-Regular.woff") format("woff"), url("/assets/font/MaterialIcons-Regular.ttf") format("truetype");
+}
 .material-icons {
   font-family: "Material Icons";
   font-weight: normal;
@@ -18,36 +19,92 @@
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "liga"; }
+  font-feature-settings: "liga";
+}
 
 body {
   margin: 0;
   padding: 0;
   background-color: #121212;
   color: #FFFFFF;
-  font-family: "Open Sans"; }
+  font-family: "Open Sans";
+}
 
 #wrapper {
   margin: auto;
-  width: 1000px; }
+  max-width: 1000px;
+}
 
-#header {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 4px; }
-  #header .button {
-    display: inline-block;
-    height: 64px;
-    width: calc(25% - 48px);
-    line-height: 64px;
-    padding: 4px 24px;
-    text-align: center; }
-    #header .button:hover {
-      height: 61px;
-      border-bottom: 3px solid #90caf9; }
-    #header .button .active {
-      background-color: #90caf9;
-      color: #000000; }
-    #header .button span, #header .button .material-icons {
-      vertical-align: middle; }
+.card {
+  background-color: rgba(255, 255, 255, 0.075);
+  border-radius: 4px;
+  margin-top: 32px;
+}
+.card h3 {
+  margin: 0;
+  padding: 0;
+  padding: 6px 24px;
+  background-color: rgba(255, 255, 255, 0.075);
+  font-size: 24px;
+  border-bottom: 1px solid #90caf9;
+}
+.card .content {
+  padding: 12px 48px;
+}
+.card nav {
+  background-color: rgba(255, 255, 255, 0.075);
+  text-align: center;
+}
+.card nav li {
+  display: inline-block;
+  height: 32px;
+  min-width: 20%;
+  line-height: 32px;
+  padding: 2px 12px;
+  cursor: pointer;
+  transition: border-bottom 0.1s ease-in-out;
+}
+.card nav li:hover {
+  border-bottom: 2px solid #90caf9;
+  height: 30px;
+}
+.card nav li .active {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.075);
+  border-radius: 4px;
+}
+header .button {
+  cursor: pointer;
+  display: inline-block;
+  height: 64px;
+  width: calc(25% - 48px);
+  line-height: 64px;
+  padding: 4px 24px;
+  text-align: center;
+  transition: border-bottom 0.1s ease-in-out;
+}
+header .button.active {
+  background-color: #90caf9;
+  color: #000000;
+}
+header .button.active:hover {
+  border-bottom: 0;
+  height: 64px;
+}
+header .button:hover {
+  height: 61px;
+  border-bottom: 3px solid #90caf9;
+}
+header .button span, header .button .material-icons {
+  vertical-align: middle;
+}
+@media (max-width: 750px) {
+  header .button span {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

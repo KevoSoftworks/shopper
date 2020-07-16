@@ -1,0 +1,48 @@
+@use "base";
+@use "card";
+
+header{
+	background-color: card.$bg;
+	border-radius: 4px;
+
+	.button{
+		$height: 64px;
+		$border: 3px;
+
+		&.active{
+			background-color: base.$bgAltColour;
+			color: base.$fgAltColour;
+
+			&:hover{
+				border-bottom: 0;
+				height: $height;
+			}
+		}
+
+		&:hover{
+			height: $height - $border;
+			border-bottom: $border solid base.$bgAltColour;
+		}
+
+		span, .material-icons{
+			vertical-align: middle;
+		}
+
+		@media (max-width: base.$mobileWidth){
+			span{
+				display: none;
+			}
+		}
+
+		cursor: pointer;
+
+		display: inline-block;
+		height: $height;
+		width: calc(25% - 48px);
+		line-height: $height;
+		padding: 4px 24px;
+		text-align: center;
+
+		transition: border-bottom 0.1s ease-in-out;
+	}
+}
