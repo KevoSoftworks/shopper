@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		},
 		data: {
 			activePage: "home",
+			activeSection: "products",
 			products: [],
 			product_types: [],
 			buttons: buttons
@@ -25,8 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		},
 		methods: {
-			setPage: function(str){
-				this.activePage = str;
+			setPage: function(id){
+				const cur = this.buttons.find(el => el._class == this.activePage);
+				cur.active = false;
+				
+				this.buttons[id].active = true;
+				this.activePage = this.buttons[id]._class;
 			}
 		}
 	});

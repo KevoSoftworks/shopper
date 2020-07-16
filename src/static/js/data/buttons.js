@@ -1,26 +1,30 @@
 export default [
 	{
 		id: 0,
-		class: "home",
+		_class: "home",
 		name: "Home",
 		icon: "home",
+		active: true
 	},
 	{
 		id: 1,
-		class: "cart",
+		_class: "cart",
 		name: "Shopping Cart",
 		icon: "shopping_cart",
+		active: false
 	},
 	{
 		id: 2,
-		class: "calendar",
+		_class: "calendar",
 		name: "Calendar",
 		icon: "today",
+		active: false
 	},
 	{
 		id: 3,
-		class: "product",
+		_class: "product",
 		name: "Products",
 		icon: "restaurant",
+		active: false
 	},
 ]

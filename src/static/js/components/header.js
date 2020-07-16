@@ -6,13 +6,13 @@ export default {
 		"header-button": header_buttons
 	},
 	template: `
-		<div id="header">
+		<header>
 			<header-button
 				v-for="button in buttons"
 				:key="button.id"
 				:button="button"
 				v-on="$listeners"
 			></header-button>
-		</div>
+		</header>
 	`
 }
