@@ -1,0 +1,33 @@
+$fonts: "material-icons", "font-awesome";
+
+@each $font in $fonts{
+	@font-face{
+		font-family: $font;
+		font-style: normal;
+		font-weight: 400;
+		@if $font == "font-awesome"{
+			src: url("/assets/font/#{$font}.otf") format("opentype"),
+		} @else {
+			src: url("/assets/font/#{$font}.woff2") format("woff2"),
+				url("/assets/font/#{$font}.woff") format("woff"),
+				url("/assets/font/#{$font}.ttf") format("truetype");
+		}
+	}
+
+	.#{$font}{
+		font-family: $font;
+		font-weight: normal;
+		font-style: normal;
+		display: inline-block;
+		text-transform: none;
+		letter-spacing: normal;
+		word-wrap: normal;
+		white-space: nowrap;
+		direction: ltr;
+	
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		-moz-osx-font-smoothing: grayscale;
+		font-feature-settings: "liga";
+	}
+}

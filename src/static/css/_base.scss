@@ -4,14 +4,26 @@ $fgColour: #FFFFFF;
 $bgAltColour: #90caf9;
 $fgAltColour: #000000;
 
+$bg: rgba(255, 255, 255, 0.075);
+
 $baseWidth: 1000px;
 $mobileWidth: 750px;
+
+$animTime: 0.25s;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 @mixin reset{
 	margin: 0;
 	padding: 0;
+	border: none;
+}
+
+@mixin h{
+	@include reset;
+	padding: 6px 24px;
+	background-color: $bg;
+	border-bottom: 1px solid $bgAltColour;
 }
 
 body{
@@ -20,6 +32,62 @@ body{
 	background-color: $bgColour;
 	color: $fgColour;
 	font-family: "Open Sans";
+}
+
+h3{
+	@include h;
+	font-size: 24px;
+}
+
+h4{
+	@include h;
+	font-size: 18px;
+}
+
+input, select, textarea{
+	background-color: $bg;
+	color: $fgColour;
+	box-sizing: border-box;
+	padding: 4px;
+	margin: 4px;
+	width: 100%;
+
+	font-family: "Open Sans";
+	font-size: 1em;
+
+	border: none;
+	border-bottom: 1px solid $fgColour;
+	border-radius: 2px;
+
+	transition: all $animTime ease-in-out;
+
+	option{
+		background-color: #333333;
+	}
+
+	&:focus {
+		border: none;
+		outline: none;
+		border-bottom: 1px solid $bgAltColour;
+	}
+
+}
+
+dialog{
+	@include reset;
+
+	width: 100%;
+	max-width: $baseWidth / 2;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+
+	background-color: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(5px);
+	color: $fgColour;
+
+	box-shadow: 0px 0px 5px 1px $bgAltColour;
 }
 
 #wrapper{

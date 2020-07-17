@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel as BM
+from typing import Optional
 from playhouse.shortcuts import model_to_dict
 
 from ..models.product import *
@@ -12,18 +13,13 @@ class Deletable(BM):
 	id: int
 
 class CreateType(BM):
-	name: str
-
-class CreatedType(BM):
-	id: int
+	id: Optional[int]
 	name: str
 
 class CreateProduct(BM):
+	id: Optional[int]
 	type: int
 	name: str
-
-class CreatedProduct(BM):
-	id: int
 
 @router.get("/types")
 async def list_types():
@@ -33,14 +29,12 @@ async def list_types():
 async def list_type(id: int):
 	return ProductType.select().where(ProductType.id == id).dicts().get()
 
-@router.post("/types", response_model=CreatedType)
+@router.post("/types", response_model=CreateType)
 async def create_type(item: CreateType):
 	new_type = ProductType(name = item.name)
 	new_type.save()
 
-	print(model_to_dict(new_type))
-
-	return model_to_dict(new_type)	# Why the fuck does this not work? Return my fucking data!
+	return model_to_dict(new_type)
 
 @router.delete("/types")
 async def delete_type(item: Deletable):
@@ -65,12 +59,14 @@ async def list_products():
 async def list_product(id: int):
 	return Product.select().where(Product.id == id and Product.visible).dicts().get()
 
-@router.post("/", response_model=CreatedProduct)
+@router.post("/", response_model=CreateProduct)
 async def create_product(product: CreateProduct):
+	# TODO: Any form of input validation
 	new_product = Product(type = product.type, name = product.name)
 	new_product.save()
 
-	return model_to_dict(new_product)
+	# Recursion must be disabled in order to fit the model we are returning.
+	return model_to_dict(new_product, recurse=False)
 
 @router.delete("/")
 async def delete_product(product: Deletable):

@@ -9,7 +9,7 @@ export default [
 	{
 		id: 1,
 		_class: "cart",
-		name: "Shopping Cart",
+		name: "Cart",
 		icon: "shopping_cart",
 		active: false
 	},

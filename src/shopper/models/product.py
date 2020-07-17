@@ -5,6 +5,7 @@ from . import BaseModel
 class ProductType(BaseModel):
 	id = IntegerField(primary_key = True, unique = True)
 	name = CharField(max_length = 255)
+	icon = CharField(max_length = 255)
 
 class Product(BaseModel):
 	id = IntegerField(primary_key = True, unique = True)

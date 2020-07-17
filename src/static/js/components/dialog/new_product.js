@@ -1,22 +1,24 @@
 export default {
 	props: [
-		"visible"
+		"visible",
+		"types"
 	],
 	data: () => {
 		return {
 			name: "",
-			type: -1
+			type: 1
 		}
 	},
 	methods: {
 		closeDialog: function(){
 			this.name = "";
-			this.type = -1;
+			this.type = 1;
 			this.$emit("close-dialog");
 		},
 
 		saveProduct: function(){
 			if(this.visible && this.name != "" && this.type != -1){
+				// TODO: Maybe do this using async/await?
 				fetch("/product", {
 					method: "POST",
 					cache: "no-cache",
@@ -30,7 +32,9 @@ export default {
 				}).then(response => {
 					// TODO: Error handling and user feedback
 					this.closeDialog();
-					this.$emit("update", "products");
+					return response.json();
+				}).then(product => {
+					this.$emit("response", product);
 				});
 			} else {
 				// TODO: Basic error handling
@@ -38,11 +42,18 @@ export default {
 		}
 	},
 	template: `
-		<dialog :open="visible">
-			<input type="text" v-model="name" /><br/>
-			<input type="number" v-model="type" /><br/>
-			<button @click="closeDialog">Cancel</button>
-			<button @click="saveProduct">Create</button>
+		<dialog class="card" :open="visible">
+			<h4>New product</h4>
+			<div class="content">
+				<input type="text" v-model="name" placeholder="Product name..."/><br/>
+				<select v-model="type">
+					<option v-for="type in types" :value="type.id">
+						{{ type.name }}
+					</option>
+				</select><br/>
+				<button @click="closeDialog">Cancel</button>
+				<button @click="saveProduct">Create</button>
+			</div>
 		</dialog>
 	`
 }

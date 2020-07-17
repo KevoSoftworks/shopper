@@ -10,6 +10,16 @@ async function getResponse(url){
 	return data;
 }
 
+function handleHashChange(){
+	const vm = globalThis.vm;
+
+	const page_id = location.hash.substring(1);
+	const hit = vm.buttons.find(el => el._class == page_id);
+	if(hit !== undefined){
+		vm.setPage(hit.id);
+	}
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	// Initialise VueJS
 	let vm = new Vue({
@@ -37,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				this.buttons[id].active = true;
 				this.activePage = this.buttons[id]._class;
+
+				history.pushState(null, null, `#${this.activePage}`);
 			},
 
 			newProductDialog: function(){
@@ -51,21 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.dialogVisible = false;
 			},
 
-			update: function(item){
-				if(item == "products"){
-					getResponse("/product").then(function(data){
-						/*
-						*	Using vm here is a little dirty, since we are already referencing it when the
-						*	object hasn't been created yet. It shouldn't be an issue, since this function
-						*	cannot be called before the vm object exists in the global scope anyway. Still,
-						*	it isn't very nice.
-						*/
-						vm.products = data;
-					});
-				}
+			addProduct: function(product){
+				console.log(product);
+				this.products.push(product);
 			}
 		}
 	});
+
+	globalThis.vm = vm;
+
+	window.addEventListener("hashchange", _ => {
+		handleHashChange();
+	});
+
+	handleHashChange();
 
 	// Load data from API
 	getResponse("/product").then(data => {
@@ -74,6 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
 	getResponse("/product/types").then(data => {
 		vm.product_types = data;
 	});
-
-	globalThis.vm = vm;
 });

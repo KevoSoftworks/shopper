@@ -1,8 +1,7 @@
 @use "base";
-@use "card";
 
 header{
-	background-color: card.$bg;
+	background-color: base.$bg;
 	border-radius: 4px;
 
 	.button{
@@ -20,15 +19,18 @@ header{
 		}
 
 		&:hover{
-			height: $height - $border;
-			border-bottom: $border solid base.$bgAltColour;
+			box-shadow: inset $border -$border 0px -$border base.$bgAltColour;
 		}
 
-		span, .material-icons{
+		span, i{
+			font-size: 20px;
 			vertical-align: middle;
 		}
 
 		@media (max-width: base.$mobileWidth){
+			i{
+				font-size: 36px;
+			}
 			span{
 				display: none;
 			}
@@ -43,6 +45,6 @@ header{
 		padding: 4px 24px;
 		text-align: center;
 
-		transition: border-bottom 0.1s ease-in-out;
+		transition: all base.$animTime ease-in-out;
 	}
 }

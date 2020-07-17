@@ -1,15 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @font-face {
-  font-family: "Material Icons";
+  font-family: "material-icons";
   font-style: normal;
   font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("/assets/font/MaterialIcons-Regular.woff2") format("woff2"), url("/assets/font/MaterialIcons-Regular.woff") format("woff"), url("/assets/font/MaterialIcons-Regular.ttf") format("truetype");
+  src: url("/assets/font/material-icons.woff2") format("woff2"), url("/assets/font/material-icons.woff") format("woff"), url("/assets/font/material-icons.ttf") format("truetype");
 }
 .material-icons {
-  font-family: "Material Icons";
+  font-family: "material-icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+}
+
+@font-face {
+  font-family: "font-awesome";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/font/font-awesome.otf") format("opentype");
+}
+.font-awesome {
+  font-family: "font-awesome";
+  font-weight: normal;
+  font-style: normal;
   display: inline-block;
   text-transform: none;
   letter-spacing: normal;
@@ -25,9 +46,69 @@
 body {
   margin: 0;
   padding: 0;
+  border: none;
   background-color: #121212;
   color: #FFFFFF;
   font-family: "Open Sans";
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  padding: 6px 24px;
+  background-color: rgba(255, 255, 255, 0.075);
+  border-bottom: 1px solid #90caf9;
+  font-size: 24px;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  padding: 6px 24px;
+  background-color: rgba(255, 255, 255, 0.075);
+  border-bottom: 1px solid #90caf9;
+  font-size: 18px;
+}
+
+input, select, textarea {
+  background-color: rgba(255, 255, 255, 0.075);
+  color: #FFFFFF;
+  box-sizing: border-box;
+  padding: 4px;
+  margin: 4px;
+  width: 100%;
+  font-family: "Open Sans";
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid #FFFFFF;
+  border-radius: 2px;
+  transition: all 0.25s ease-in-out;
+}
+input option, select option, textarea option {
+  background-color: #333333;
+}
+input:focus, select:focus, textarea:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #90caf9;
+}
+
+dialog {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  color: #FFFFFF;
+  box-shadow: 0px 0px 5px 1px #90caf9;
 }
 
 #wrapper {
@@ -35,18 +116,48 @@ body {
   max-width: 1000px;
 }
 
+header {
+  background-color: rgba(255, 255, 255, 0.075);
+  border-radius: 4px;
+}
+header .button {
+  cursor: pointer;
+  display: inline-block;
+  height: 64px;
+  width: calc(25% - 48px);
+  line-height: 64px;
+  padding: 4px 24px;
+  text-align: center;
+  transition: all 0.25s ease-in-out;
+}
+header .button.active {
+  background-color: #90caf9;
+  color: #000000;
+}
+header .button.active:hover {
+  border-bottom: 0;
+  height: 64px;
+}
+header .button:hover {
+  box-shadow: inset 0px -3px #90caf9;
+}
+header .button span, header .button i {
+  font-size: 20px;
+  vertical-align: middle;
+}
+@media (max-width: 750px) {
+  header .button i {
+    font-size: 36px;
+  }
+  header .button span {
+    display: none;
+  }
+}
+
 .card {
   background-color: rgba(255, 255, 255, 0.075);
   border-radius: 4px;
   margin-top: 32px;
-}
-.card h3 {
-  margin: 0;
-  padding: 0;
-  padding: 6px 24px;
-  background-color: rgba(255, 255, 255, 0.075);
-  font-size: 24px;
-  border-bottom: 1px solid #90caf9;
 }
 .card .content {
   padding: 12px 48px;
@@ -62,49 +173,13 @@ body {
   line-height: 32px;
   padding: 2px 12px;
   cursor: pointer;
-  transition: border-bottom 0.1s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 .card nav li:hover {
-  border-bottom: 2px solid #90caf9;
-  height: 30px;
+  box-shadow: inset 0px -2px #90caf9;
 }
 .card nav li.active {
   background-color: rgba(255, 255, 255, 0.075);
-}
-
-header {
-  background-color: rgba(255, 255, 255, 0.075);
-  border-radius: 4px;
-}
-header .button {
-  cursor: pointer;
-  display: inline-block;
-  height: 64px;
-  width: calc(25% - 48px);
-  line-height: 64px;
-  padding: 4px 24px;
-  text-align: center;
-  transition: border-bottom 0.1s ease-in-out;
-}
-header .button.active {
-  background-color: #90caf9;
-  color: #000000;
-}
-header .button.active:hover {
-  border-bottom: 0;
-  height: 64px;
-}
-header .button:hover {
-  height: 61px;
-  border-bottom: 3px solid #90caf9;
-}
-header .button span, header .button .material-icons {
-  vertical-align: middle;
-}
-@media (max-width: 750px) {
-  header .button span {
-    display: none;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

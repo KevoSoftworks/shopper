@@ -1,26 +1,18 @@
 @use "base";
 
-$bg: rgba(255, 255, 255, 0.075);
+$border: 2px;
 
 .card{
-	background-color: $bg;
+	background-color: base.$bg;
 	border-radius: 4px;
 	margin-top: 32px;
-
-	h3{
-		@include base.reset;
-		padding: 6px 24px;
-		background-color: $bg;
-		font-size: 24px;
-		border-bottom: 1px solid base.$bgAltColour;
-	}
 
 	.content{
 		padding: 12px 48px;
 	}
 
 	nav{
-		background-color: $bg;
+		background-color: base.$bg;
 		text-align: center;
 
 		li {
@@ -31,15 +23,14 @@ $bg: rgba(255, 255, 255, 0.075);
 			padding: 2px 12px;
 			cursor: pointer;
 
-			transition: border-bottom 0.1s ease-in-out;
+			transition: all base.$animTime ease-in-out;
 
 			&:hover{
-				border-bottom: 2px solid base.$bgAltColour;
-				height: 30px;
+				box-shadow: inset $border -$border 0px -$border base.$bgAltColour;
 			}
 
 			&.active{
-				background-color: $bg;
+				background-color: base.$bg;
 			}
 		}
 	}

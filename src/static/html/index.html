@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Shopper</title>
@@ -31,18 +32,23 @@
 				<section id="products" class="content" v-show="activeSection == 'products'">
 					<button @click="newProductDialog">New product</button>
 					<ul>
-						<li v-for="product in products">{{ product.name }} - {{ product_types[product.type].name }}</li>
+						<li v-for="product in products">{{ product.name }} <i class="font-awesome">{{ product_types.find(el => el.id == product.type).icon }}</i></li>
 					</ul>
 				</section>
 				<section id="categories" class="content" v-show="activeSection == 'types'">
 					<button @click="newProductTypeDialog">New type</button>
 					<ul>
-						<li v-for="type in product_types">{{ type.name }}</li>
+						<li v-for="type in product_types">{{ type.name }} <i class="font-awesome">{{ type.icon }}</i></li>
 					</ul>
 				</section>
 			</div>
 
-			<new-product-dialog v-bind:visible="dialogVisible == 'new-product-dialog'" @close-dialog="closeDialog" @update="update"></new-product-dialog>
+			<new-product-dialog 
+				:visible="dialogVisible == 'new-product-dialog'"
+				:types="product_types"
+				@close-dialog="closeDialog" 
+				@response="addProduct"
+			></new-product-dialog>
 		</div>
 	</body>
 </html>
