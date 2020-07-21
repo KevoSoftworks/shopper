@@ -30,16 +30,30 @@
 					<li :class="{active: activeSection == 'types'}" @click="activeSection = 'types'">Categories</li>
 				</nav>
 				<section id="products" class="content" v-show="activeSection == 'products'">
-					<button @click="newProductDialog">New product</button>
-					<ul>
-						<li v-for="product in products">{{ product.name }} <i class="font-awesome">{{ product_types.find(el => el.id == product.type).icon }}</i></li>
-					</ul>
+					<div class="flex">
+						<input type="search" v-model="search" placeholder="Search products" />
+						<button class="circle" @click="newProductDialog">
+							<i class="material-icons">add</i>
+						</button>
+					</div>					
+					<product-list
+						:products="products"
+						:query="search"
+					></product-list>
 				</section>
 				<section id="categories" class="content" v-show="activeSection == 'types'">
-					<button @click="newProductTypeDialog">New type</button>
-					<ul>
-						<li v-for="type in product_types">{{ type.name }} <i class="font-awesome">{{ type.icon }}</i></li>
-					</ul>
+					<div class="flex">
+						<input type="search" v-model="search" placeholder="Search product types" />
+						<button class="circle" @click="newProductTypeDialog">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+					
+					<product-list
+						:products="product_types"
+						:is-type="true"
+						:query="search"
+					></product-list>
 				</section>
 			</div>
 

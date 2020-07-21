@@ -26,6 +26,18 @@ $animTime: 0.25s;
 	border-bottom: 1px solid $bgAltColour;
 }
 
+@mixin input{
+	background-color: $bg;
+	color: $fgColour;
+	box-sizing: border-box;
+
+	font-family: "Open Sans";
+
+	border: none;
+
+	transition: all $animTime ease-in-out;
+}
+
 body{
 	@include reset;
 
@@ -45,21 +57,16 @@ h4{
 }
 
 input, select, textarea{
-	background-color: $bg;
-	color: $fgColour;
-	box-sizing: border-box;
+	@include input;
+
 	padding: 4px;
-	margin: 4px;
+	margin: 8px 0px;
 	width: 100%;
 
-	font-family: "Open Sans";
 	font-size: 1em;
 
-	border: none;
 	border-bottom: 1px solid $fgColour;
 	border-radius: 2px;
-
-	transition: all $animTime ease-in-out;
 
 	option{
 		background-color: #333333;
@@ -70,7 +77,36 @@ input, select, textarea{
 		outline: none;
 		border-bottom: 1px solid $bgAltColour;
 	}
+}
 
+button{
+	@include input;
+
+	margin: 8px 8px;
+	padding: 8px 16px;
+
+	font-size: 16px;
+
+	border-radius: 4px;
+
+	&.circle{
+		$circ: 48px;
+
+		width: $circ;
+		min-width: $circ; /* Yup, we must force this, otherwise the flexbox will still
+							resize it on small displays */
+		height: $circ;
+		line-height: $circ;
+		padding: 0;
+
+		border-radius: 50%;
+		font-size: 28px;
+	}
+
+	&:hover{
+		color: $fgAltColour;
+		background-color: $bgAltColour;
+	}
 }
 
 dialog{
@@ -83,8 +119,8 @@ dialog{
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
 
-	background-color: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(5px);
+	background-color: rgba(18, 18, 18, 0.2) !important;
+	backdrop-filter: blur(10px);
 	color: $fgColour;
 
 	box-shadow: 0px 0px 5px 1px $bgAltColour;
@@ -93,4 +129,14 @@ dialog{
 #wrapper{
 	margin: auto;
 	max-width: $baseWidth;
+}
+
+.flex{
+	display: flex;
+	justify-self: space-evenly;
+	align-items: stretch;
+
+	&.nostretch{
+		align-items: center;
+	}
 }

@@ -1,5 +1,6 @@
 import header from "./components/header.js";
 import buttons from "./data/buttons.js";
+import product_list from "./components/product_list.js";
 
 import new_product_dialog from "./components/dialog/new_product.js";
 
@@ -26,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		el: "#wrapper",
 		components: {
 			"header-wrapper": header,
-			"new-product-dialog": new_product_dialog
+			"new-product-dialog": new_product_dialog,
+			"product-list": product_list
 		},
 		data: {
 			activePage: "home",
@@ -35,7 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			product_types: [],
 			buttons: buttons,
 
-			dialogVisible: false
+			dialogVisible: false,
+
+			search: ""
 		},
 		computed: {
 
@@ -65,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			addProduct: function(product){
 				console.log(product);
-				this.products.push(product);
+				this.products.unshift(product);
 			}
 		}
 	});

@@ -1,0 +1,96 @@
+@use "base";
+
+$margin: 4px;
+$width: 200px;
+$mobileWidth: 150px;
+$height: 80px;
+
+$nonFocusColour: rgba(255, 255, 255, 0.25);
+
+@mixin core{
+	@include base.reset;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax($width, 1fr));
+	grid-column-gap: 2*$margin;
+	justify-items: center;
+
+	li{
+		display: table;
+		margin: $margin;
+		width: $width;
+		height: $height;
+
+		transition: all base.$animTime ease-in-out;
+
+		&:hover{
+			color: base.$fgAltColour;
+			background-color: base.$bgAltColour;
+		}
+
+		span{
+			display: table-cell;
+			text-align: center;
+			text-overflow: ellipsis;
+			padding: $margin;
+		}
+
+		i{
+			position: absolute;
+			z-index: 0;
+		}
+	}
+
+	@media (max-width: base.$mobileWidth){
+		grid-template-columns: repeat(auto-fill, minmax($mobileWidth, 1fr));
+		
+		li{
+			width: $mobileWidth;
+		}
+	}
+}
+
+ul.products, ul.product_types{
+	list-style-type: none;
+}
+
+.products{
+	@include core;
+	li{
+		span{
+			vertical-align: middle;
+		}
+
+		i{
+			color: $nonFocusColour;
+			font-size: 20px;
+			transform: 
+				translateX(calc(-100% - #{2*$margin}))
+				translateY(calc(#{$height} - 100% - #{2*$margin}));
+		}
+	}
+}
+
+.product_types{
+	@include core;
+	li{
+		span{
+			color: $nonFocusColour;
+			vertical-align: bottom;
+			font-size: 12px;
+		}
+
+		i{
+			font-size: 36px;
+			transform: 
+				translateX(calc(-50% - #{$width / 2}))
+				translateY(calc(#{$height / 2} - 75%));
+
+			@media (max-width: base.$mobileWidth){
+				transform: 
+					translateX(calc(-50% - #{$mobileWidth / 2}))
+					translateY(calc(#{$height / 2} - 75%));
+			}
+		}
+	}
+}
