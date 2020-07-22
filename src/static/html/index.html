@@ -35,7 +35,7 @@
 						<button class="circle" @click="newProductDialog">
 							<i class="material-icons">add</i>
 						</button>
-					</div>					
+					</div>
 					<product-list
 						:products="products"
 						:query="search"
@@ -56,13 +56,35 @@
 					></product-list>
 				</section>
 			</div>
+			<div class="card" v-show="activePage == 'recipe'">
+				<h3>Recipe book</h3>
+				<div class="content">
+					<div class="flex">
+						<input type="search" v-model="search" placeholder="Search in the recipe book" />
+						<button class="circle" @click="newRecipeDialog">
+							<i class="material-icons">add</i>
+						</button>
+					</div>
+
+					<list
+						:items="recipes"
+						:query="search"
+					></list>
+				</div>
+			</div>
 
 			<new-product-dialog 
 				:visible="dialogVisible == 'new-product-dialog'"
 				:types="product_types"
-				@close-dialog="closeDialog" 
+				@close-dialog="closeDialog"
 				@response="addProduct"
 			></new-product-dialog>
+
+			<new-product-type-dialog
+				:visible="dialogVisible == 'new-product-type-dialog'"
+				@close-dialog="closeDialog"
+				@response="addProductType"
+			></new-product-type-dialog>
 		</div>
 	</body>
 </html>

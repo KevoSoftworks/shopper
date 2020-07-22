@@ -15,11 +15,13 @@ class Deletable(BM):
 class CreateType(BM):
 	id: Optional[int]
 	name: str
+	icon: str
 
 class CreateProduct(BM):
 	id: Optional[int]
 	type: int
 	name: str
+	unit: str
 
 @router.get("/types")
 async def list_types():
@@ -31,7 +33,7 @@ async def list_type(id: int):
 
 @router.post("/types", response_model=CreateType)
 async def create_type(item: CreateType):
-	new_type = ProductType(name = item.name)
+	new_type = ProductType(name = item.name, icon = item.icon)
 	new_type.save()
 
 	return model_to_dict(new_type)
@@ -51,7 +53,7 @@ async def list_type(id: int):
 		Product.visible \
 	).order_by(Product.name).dicts()]
 
-@router.get("/")
+@router.get("")
 async def list_products():
 	query = Product.select(Product, ProductType.icon).join(ProductType) \
 		.where(Product.visible)
@@ -61,16 +63,16 @@ async def list_products():
 async def list_product(id: int):
 	return Product.select().where(Product.id == id and Product.visible).dicts().get()
 
-@router.post("/", response_model=CreateProduct)
+@router.post("", response_model=CreateProduct)
 async def create_product(product: CreateProduct):
 	# TODO: Any form of input validation
-	new_product = Product(type = product.type, name = product.name)
+	new_product = Product(type = product.type, name = product.name, unit = product.unit)
 	new_product.save()
 
 	# Recursion must be disabled in order to fit the model we are returning.
 	return model_to_dict(new_product, recurse=False)
 
-@router.delete("/")
+@router.delete("")
 async def delete_product(product: Deletable):
 	delete_product = Product.get(Product.id == product.id)
 	delete_product.visible = False

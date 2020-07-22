@@ -15,7 +15,7 @@ $nonFocusColour: rgba(255, 255, 255, 0.25);
 	grid-column-gap: 2*$margin;
 	justify-items: center;
 
-	li{
+	> li{
 		display: table;
 		margin: $margin;
 		width: $width;
@@ -44,7 +44,7 @@ $nonFocusColour: rgba(255, 255, 255, 0.25);
 	@media (max-width: base.$mobileWidth){
 		grid-template-columns: repeat(auto-fill, minmax($mobileWidth, 1fr));
 		
-		li{
+		> li{
 			width: $mobileWidth;
 		}
 	}
@@ -56,7 +56,7 @@ ul.products, ul.product_types{
 
 .products{
 	@include core;
-	li{
+	> li{
 		span{
 			vertical-align: middle;
 		}
@@ -73,7 +73,7 @@ ul.products, ul.product_types{
 
 .product_types{
 	@include core;
-	li{
+	> li{
 		span{
 			color: $nonFocusColour;
 			vertical-align: bottom;

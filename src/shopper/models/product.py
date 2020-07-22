@@ -11,4 +11,5 @@ class Product(BaseModel):
 	id = IntegerField(primary_key = True, unique = True)
 	type = ForeignKeyField(ProductType, column_name = "type", null = True, default=None)
 	name = TextField()
+	unit = CharField(max_length = 10, default="")
 	visible = BooleanField(default = True)

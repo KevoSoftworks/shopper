@@ -27,4 +27,11 @@ export default [
 		icon: "restaurant",
 		active: false
 	},
+	{
+		id: 4,
+		_class: "recipe",
+		name: "Recipe book",
+		icon: "book",
+		active: false
+	},
 ]

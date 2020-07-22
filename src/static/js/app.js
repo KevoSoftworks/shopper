@@ -1,8 +1,10 @@
 import header from "./components/header.js";
 import buttons from "./data/buttons.js";
 import product_list from "./components/product_list.js";
+import list from "./components/list.js";
 
 import new_product_dialog from "./components/dialog/new_product.js";
+import new_product_type_dialog from "./components/dialog/new_product_type.js";
 
 async function getResponse(url){
 	const response = await fetch(url);
@@ -28,13 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		components: {
 			"header-wrapper": header,
 			"new-product-dialog": new_product_dialog,
-			"product-list": product_list
+			"new-product-type-dialog": new_product_type_dialog,
+			"product-list": product_list,
+			"list": list
 		},
 		data: {
 			activePage: "home",
 			activeSection: "products",
 			products: [],
 			product_types: [],
+			recipes: [],
 			buttons: buttons,
 
 			dialogVisible: false,
@@ -53,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.activePage = this.buttons[id]._class;
 
 				history.pushState(null, null, `#${this.activePage}`);
+
+				this.search = "";
 			},
 
 			newProductDialog: function(){
@@ -60,7 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			},
 
 			newProductTypeDialog: function(){
+				this.dialogVisible = "new-product-type-dialog";
+			},
 
+			newRecipeDialog: function(){
+				alert("Recipe add dialog!");
 			},
 
 			closeDialog: function(){
@@ -68,8 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			},
 
 			addProduct: function(product){
-				console.log(product);
 				this.products.unshift(product);
+			},
+
+			addProductType: function(type){
+				this.product_types.push(type);
 			}
 		}
 	});
@@ -89,4 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	getResponse("/product/types").then(data => {
 		vm.product_types = data;
 	});
+	getResponse("/recipe").then(data => {
+		vm.recipes = data;
+	})
 });

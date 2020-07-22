@@ -1,5 +1,7 @@
 @use "base";
 
+$items: 5;
+
 header{
 	background-color: base.$bg;
 	border-radius: 4px;
@@ -40,10 +42,11 @@ header{
 
 		display: inline-block;
 		height: $height;
-		width: calc(25% - 48px);
+		width: calc(100%/#{$items} - 24px);
 		line-height: $height;
-		padding: 4px 24px;
+		padding: 4px 12px;
 		text-align: center;
+		overflow: hidden;
 
 		transition: all base.$animTime ease-in-out;
 	}
