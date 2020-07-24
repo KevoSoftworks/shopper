@@ -32,7 +32,7 @@
 				<section id="products" class="content" v-show="activeSection == 'products'">
 					<div class="flex">
 						<input type="search" v-model="search" placeholder="Search products" />
-						<button class="circle" @click="newProductDialog">
+						<button class="circle" @click="showDialog('new-product-dialog')">
 							<i class="material-icons">add</i>
 						</button>
 					</div>
@@ -44,7 +44,7 @@
 				<section id="categories" class="content" v-show="activeSection == 'types'">
 					<div class="flex">
 						<input type="search" v-model="search" placeholder="Search product types" />
-						<button class="circle" @click="newProductTypeDialog">
+						<button class="circle" @click="showDialog('new-product-type-dialog')">
 							<i class="material-icons">add</i>
 						</button>
 					</div>
@@ -61,7 +61,7 @@
 				<div class="content">
 					<div class="flex">
 						<input type="search" v-model="search" placeholder="Search in the recipe book" />
-						<button class="circle" @click="newRecipeDialog">
+						<button class="circle" @click="showDialog('new-recipe-dialog')">
 							<i class="material-icons">add</i>
 						</button>
 					</div>
@@ -69,6 +69,7 @@
 					<list
 						:items="recipes"
 						:query="search"
+						@add-to-cart="addToCart"
 					></list>
 				</div>
 			</div>

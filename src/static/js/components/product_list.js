@@ -15,6 +15,11 @@ export default {
 	components: {
 		"product-card": product
 	},
+	methods:{
+		add: function(id){
+			this.$emit("add-product", id);
+		}
+	},
 	computed: {
 		cur_products: function(){
 			if(typeof this.query === "undefined")
@@ -38,6 +43,7 @@ export default {
 				v-for="product in cur_products"
 				:key="product.id"
 				:product="product"
+				@add-product="add"
 			></product-card>
 		</ul>
 	`

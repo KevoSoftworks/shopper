@@ -16,6 +16,8 @@ class CreateRecipe(BM):
 	id: Optional[int]
 	name: str
 	content: str
+	upvotes: Optional[int]
+	downvotes: Optional[int]
 
 @router.get("")
 async def list_recipes():
@@ -39,9 +41,21 @@ async def create_recipe(recipe: CreateRecipe):
 
 	return model_to_dict(new_recipe)
 
-@router.delete("")
-async def delete_recipe(recipe: Deletable):
-	delete_recipe = Recipe.get(Recipe.id == recipe.id)
+@router.post("/{id}/{type}vote")
+async def vote(id: int, type: str):
+	recipe = Recipe.get(Recipe.id == id)
+	if type == "up":
+		recipe.upvotes += 1
+	elif type == "down":
+		recipe.downvotes += 1
+
+	recipe.save()
+
+	return True
+
+@router.delete("/{id}")
+async def delete_recipe(id: int):
+	delete_recipe = Recipe.get(Recipe.id == id)
 	delete_recipe.visible = False
 	delete_recipe.save()
 

@@ -62,16 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.search = "";
 			},
 
-			newProductDialog: function(){
-				this.dialogVisible = "new-product-dialog";
-			},
-
-			newProductTypeDialog: function(){
-				this.dialogVisible = "new-product-type-dialog";
-			},
-
-			newRecipeDialog: function(){
-				alert("Recipe add dialog!");
+			showDialog: function(dialog){
+				this.dialogVisible = dialog;
 			},
 
 			closeDialog: function(){
@@ -84,6 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			addProductType: function(type){
 				this.product_types.push(type);
+			},
+
+			addToCart: function(data){
+				alert(`Add ${data.id} ${data.amount} times`);
 			}
 		}
 	});

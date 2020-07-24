@@ -7,6 +7,8 @@ class Recipe(BaseModel):
 	id = IntegerField(primary_key = True, unique = True)
 	name = TextField()
 	content = TextField()
+	upvotes = IntegerField()
+	downvotes = IntegerField()
 	visible = BooleanField(default = True)
 
 class RecipeIngredients(BaseModel):

@@ -11,6 +11,12 @@ export default {
 	components: {
 		"item-card": item
 	},
+	methods: {
+		addToCart: function(data){
+			// TODO: Check if this list is actually the cart already
+			this.$emit("add-to-cart", data);
+		}
+	},
 	computed: {
 		cur_items: function(){
 			if(typeof this.query === "undefined")
@@ -30,6 +36,7 @@ export default {
 				v-for="item in cur_items"
 				:key="item.id"
 				:item="item"
+				@add-to-cart="addToCart"
 			></item-card>
 		</ul>
 	`

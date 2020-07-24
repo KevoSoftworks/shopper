@@ -90,17 +90,23 @@ button{
 	border-radius: 4px;
 
 	&.circle{
-		$circ: 48px;
+		@mixin circle($dia){
+			width: $dia;
+			min-width: $dia; /* Yup, we must force this, otherwise the flexbox will still
+								resize it on small displays */
+			height: $dia;
+			line-height: $dia;
+			padding: 0;
+	
+			border-radius: 50%;
+			font-size: $dia / 2;
+		}
 
-		width: $circ;
-		min-width: $circ; /* Yup, we must force this, otherwise the flexbox will still
-							resize it on small displays */
-		height: $circ;
-		line-height: $circ;
-		padding: 0;
+		@include circle(48px);
 
-		border-radius: 50%;
-		font-size: 28px;
+		&.small{
+			@include circle(32px);
+		}
 	}
 
 	&:hover{
@@ -139,4 +145,13 @@ dialog{
 	&.nostretch{
 		align-items: center;
 	}
+
+	&.right{
+		justify-content: flex-end;
+	}
+}
+
+.subtext{
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 14px;
 }

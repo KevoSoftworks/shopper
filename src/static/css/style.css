@@ -117,7 +117,18 @@ button.circle {
   line-height: 48px;
   padding: 0;
   border-radius: 50%;
-  font-size: 28px;
+  font-size: 24px;
+}
+button.circle.small {
+  width: 32px;
+  min-width: 32px;
+  /* Yup, we must force this, otherwise the flexbox will still
+  resize it on small displays */
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 16px;
 }
 button:hover {
   color: #000000;
@@ -152,6 +163,14 @@ dialog {
 }
 .flex.nostretch {
   align-items: center;
+}
+.flex.right {
+  justify-content: flex-end;
+}
+
+.subtext {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
 }
 
 header {
