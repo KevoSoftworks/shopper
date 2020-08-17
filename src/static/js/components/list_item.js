@@ -21,6 +21,8 @@ export default{
 		edit: function(){
 			if(this.hasContent){
 				// Assume recipe
+				globalThis.vm.recipeEdit = globalThis.vm.recipes.findIndex(el => el.id == this.item.id);
+				globalThis.vm.showDialog("edit-recipe-dialog");
 			} else {
 				// Assume product in cart
 			}
@@ -64,10 +66,28 @@ export default{
 		addToCart: function(id){
 			let product = this.item.products.find(el => el.product_id == id);
 
-			this.$emit("add-to-cart", {
+			this.$emit("add-to-cart", [{
 				"id": id,
 				"amount": product.amount
-			});
+			}]);
+		},
+
+		addAll: function(){
+			const toCart = this.item.products.reduce((acc, cur) => {
+				acc.push(
+					{
+						"id": cur.product_id,
+						"amount": cur.amount
+					}
+				)
+				return acc;
+			}, []);
+
+			this.$emit("add-to-cart", toCart);
+		},
+
+		addToCalendar: function(){
+			alert("Add this to the calendar");
 		}
 	},
 	computed: {
@@ -140,6 +160,8 @@ export default{
 					<span style="margin-right: 8px">{{ ratingString }}</span>
 					<button class="circle small" @click="vote(1)"><i class="material-icons">thumb_up</i></button>
 					<button class="circle small" @click="vote(-1)"><i class="material-icons">thumb_down</i></button>
+					<button class="circle small" @click="addAll"><i class="material-icons">add_shopping_cart</i></button>
+					<button class="circle small" @click="addToCalendar"><i class="material-icons">event</i></button>
 					<button class="circle small" @click="edit"><i class="material-icons">create</i></button>
 					<button class="circle small" @click="remove"><i class="material-icons">delete</i></button>
 				</div>

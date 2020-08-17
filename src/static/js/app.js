@@ -2,9 +2,11 @@ import header from "./components/header.js";
 import buttons from "./data/buttons.js";
 import product_list from "./components/product_list.js";
 import list from "./components/list.js";
+import calendar from "./components/calendar.js";
 
 import new_product_dialog from "./components/dialog/new_product.js";
 import new_product_type_dialog from "./components/dialog/new_product_type.js";
+import edit_recipe_dialog from "./components/dialog/recipe_edit.js";
 
 async function getResponse(url){
 	const response = await fetch(url);
@@ -31,12 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			"header-wrapper": header,
 			"new-product-dialog": new_product_dialog,
 			"new-product-type-dialog": new_product_type_dialog,
+			"edit-recipe-dialog": edit_recipe_dialog,
 			"product-list": product_list,
-			"list": list
+			"list": list,
+			"calendar": calendar
 		},
 		data: {
 			activePage: "home",
 			activeSection: "products",
+			calendar: [],
 			products: [],
 			product_types: [],
 			recipes: [],
@@ -44,7 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			dialogVisible: false,
 
-			search: ""
+			search: "",
+			recipeEdit: -1
 		},
 		computed: {
 
@@ -78,8 +84,21 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.product_types.push(type);
 			},
 
-			addToCart: function(data){
-				alert(`Add ${data.id} ${data.amount} times`);
+			addToCart: function(list){
+				for(let i of list){
+					console.log(`Item ${i.id} needs to be in cart ${i.amount} times`);
+				}
+			},
+
+			createCalendar: function(){
+				fetch("/calendar/new", {
+					method: "POST",
+					cache: "no-cache",
+				}).then(response => {
+					response.json();
+				}).then(calendar => {
+					this.calendar = calendar;
+				});
 			}
 		}
 	});

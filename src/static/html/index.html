@@ -22,6 +22,14 @@
 			</div>
 			<div class="card" v-show="activePage == 'calendar'">
 				<h3>Calendar</h3>
+				<div class="content">
+					<button @click="createCalendar">
+						New week menu
+					</button>
+					<calendar
+						:entries="calendar"
+					></calendar>
+				</div>
 			</div>
 			<div class="card" v-show="activePage == 'product'">
 				<h3>Products</h3>
@@ -61,7 +69,7 @@
 				<div class="content">
 					<div class="flex">
 						<input type="search" v-model="search" placeholder="Search in the recipe book" />
-						<button class="circle" @click="showDialog('new-recipe-dialog')">
+						<button class="circle" @click="recipeEdit = -1; showDialog('edit-recipe-dialog')">
 							<i class="material-icons">add</i>
 						</button>
 					</div>
@@ -86,6 +94,13 @@
 				@close-dialog="closeDialog"
 				@response="addProductType"
 			></new-product-type-dialog>
+
+			<edit-recipe-dialog
+				:visible="dialogVisible == 'edit-recipe-dialog'"
+				:recipe="recipes[recipeEdit]"
+				@close-dialog="closeDialog"
+				@response="alert('recipe edit response')"
+			></edit-recipe-dialog>
 		</div>
 	</body>
 </html>
