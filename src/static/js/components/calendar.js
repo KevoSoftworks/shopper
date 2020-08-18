@@ -1,14 +1,5 @@
 export default {
 	props: ["entries"],
-	data: {
-		/*
-			Because we are not defining the data of this component as a function, Vue will
-			warn us about the properties within being shared across all `calendar` compontents.
-			This is a non-issue, since we (currently) have only one calendar instance, and this
-			data is static and should not be mutable.
-		*/
-		days: ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-	},
 	methods: {
 		goto: function(recipe_id){
 
@@ -22,8 +13,8 @@ export default {
 
 		}
 	},
-	computed: {
-
+	created: function(){
+		this.days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 	},
 	template: `
 		<table class="calendar">

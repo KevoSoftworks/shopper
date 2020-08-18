@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 
-from .routes import calendar, cart, product, recipe
+from .routes import calendar, cart, product, recipe, devtools
 
 # Initialise FastAPI and disable any form of open documentation
 web = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
@@ -16,6 +16,7 @@ web.include_router(calendar.router, prefix="/calendar")
 web.include_router(cart.router, prefix="/cart")
 web.include_router(product.router, prefix="/product")
 web.include_router(recipe.router, prefix="/recipe")
+web.include_router(devtools.router, prefix="/devtools")
 
 # Handle the root route
 @web.get("/", response_class=HTMLResponse)

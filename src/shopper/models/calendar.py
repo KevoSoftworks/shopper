@@ -4,13 +4,13 @@ from . import BaseModel
 from .recipe import Recipe
 
 class Calendar(BaseModel):
-	id = IntegerField(primary_key = True, unique = True)
+	id = AutoField()
 	date = DateField()
 	name = TextField()
 	visible = BooleanField(default = True)
 
 class CalendarContent(BaseModel):
-	id = IntegerField(primary_key = True, unique = True)
+	id = AutoField()
 	calendar_id = ForeignKeyField(Calendar)
 	recipe_id = ForeignKeyField(Recipe, null = True, default = None)
 	entry = IntegerField()

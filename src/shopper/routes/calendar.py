@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import reduce
 from fastapi import APIRouter
 from pydantic import BaseModel as BM
@@ -19,11 +20,12 @@ class Deletable(BM):
 async def get_calendar_content(id: Optional[int] = None):
 	cal = await get_calendar(id)
 
-	content = CalendarContent.select().where(CalendarContent.visible == True) \
+	content = CalendarContent.select().where( \
+			CalendarContent.visible == True and \
+			CalendarContent.calendar_id == cal["id"]) \
 		.dicts()
 
-	entry = list(range(7))
-	content = [i for i in content]
+	return [i for i in content]
 
 	
 
@@ -38,5 +40,19 @@ async def get_calendar(id: Optional[int] = None):
 
 	# Yup, this breaks if we have no calendars of if the id doesn't exist
 	return Calendar.select().where(cond) \
-		.order_by(Calendar.date.desc()).limit(1) \
+		.order_by(Calendar.id.desc()).limit(1) \
 		.dicts().get()
+
+@router.post("/new")
+async def create_calendar():
+	# First, we create the calendar itself
+	new_cal = Calendar(date = datetime.now(), name = datetime.now())
+	new_cal.save()
+
+	# Next, we populate the calendar content
+	CalendarContent.insert_many(
+		[(new_cal.id, i) for i in range(7)], \
+		fields=[CalendarContent.calendar_id, CalendarContent.entry]
+	).execute()
+
+	return await get_calendar_content(new_cal.id)

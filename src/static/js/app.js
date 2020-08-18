@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					method: "POST",
 					cache: "no-cache",
 				}).then(response => {
-					response.json();
+					return response.json();
 				}).then(calendar => {
 					this.calendar = calendar;
 				});
@@ -120,5 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 	getResponse("/recipe").then(data => {
 		vm.recipes = data;
+	})
+	getResponse("/calendar/content").then(data => {
+		vm.calendar = data;
 	})
 });
