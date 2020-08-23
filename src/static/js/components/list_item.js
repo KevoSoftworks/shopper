@@ -87,7 +87,20 @@ export default{
 		},
 
 		addToCalendar: function(){
-			alert("Add this to the calendar");
+			// TODO: Maybe do this using async/await?
+			// TODO: Select which day to add to
+			fetch(`/calendar/add`, {
+				method: "POST",
+				body: JSON.stringify({
+					"recipe_id": this.item.id
+				}),
+				cache: "no-cache",
+			}).then(response => {
+				// TODO: Error handling and user feedback
+				return response.json()
+			}).then(content => {
+				globalThis.vm.calendar = content;
+			})
 		}
 	},
 	computed: {

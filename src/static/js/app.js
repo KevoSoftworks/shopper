@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			dialogVisible: false,
 
 			search: "",
+			pendingSearch: "",
 			recipeEdit: -1
 		},
 		computed: {
@@ -65,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				history.pushState(null, null, `#${this.activePage}`);
 
-				this.search = "";
+				this.search = this.pendingSearch;
+				this.pendingSearch = "";
 			},
 
 			showDialog: function(dialog){

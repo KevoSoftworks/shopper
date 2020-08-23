@@ -173,6 +173,10 @@ dialog {
   font-size: 14px;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 header {
   background-color: rgba(255, 255, 255, 0.075);
   border-radius: 4px;
@@ -393,6 +397,22 @@ ul.list {
   padding: 0;
   border: none;
   padding: 24px;
+}
+
+.calendar {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.calendar th {
+  border-bottom: 1px solid #90caf9;
+}
+.calendar th, .calendar td {
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.calendar th.expand, .calendar td.expand {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

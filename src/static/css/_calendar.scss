@@ -1,0 +1,20 @@
+@use "base";
+
+.calendar{
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+
+	th{
+		border-bottom: 1px solid base.$bgAltColour;
+	}
+
+	th, td{
+		padding: 2px 8px;
+		white-space: nowrap;
+
+		&.expand{
+			width: 100%;
+		}
+	}
+}

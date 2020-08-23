@@ -12,6 +12,10 @@ router = APIRouter()
 
 # Ok fuck it, for now I'm going to put request models right here, since my database models
 # use similar classing definitions. I'll solve this someday.
+class AddableContent(BM):
+	recipe_id: Optional[int] = None
+	text: Optional[str] = None
+
 class Deletable(BM):
 	id: int
 
@@ -26,8 +30,6 @@ async def get_calendar_content(id: Optional[int] = None):
 		.dicts()
 
 	return [i for i in content]
-
-	
 
 @router.get("")
 @router.get("/{id}")
@@ -56,3 +58,40 @@ async def create_calendar():
 	).execute()
 
 	return await get_calendar_content(new_cal.id)
+
+@router.post("/add")
+@router.post("/add/{entry}")
+@router.post("/{id}/add")
+@router.post("/{id}/add/{entry}")
+async def add_to_calendar(content: AddableContent, entry: Optional[int] = None, id: Optional[int] = None):
+	if id is None:
+		cal = await get_calendar()
+		id = cal["id"]
+
+	cond = [CalendarContent.calendar_id == id, CalendarContent.visible == 1]
+	if entry is None:
+		cond.extend([CalendarContent.recipe_id == None, CalendarContent.content == None])
+	else:
+		cond.append(CalendarContent.entry == entry)
+	cond = reduce(operator.and_, cond)
+
+	if content.recipe_id is not None:
+		query = CalendarContent.update(recipe_id = content.recipe_id)
+	elif content.text is not None:
+		query = CalendarContent.update(content = content.text)
+	else:
+		# TODO: Throw error
+		return False
+
+	query = query.where(cond).limit(1)
+	query.execute()
+
+	return await get_calendar_content(id)
+
+@router.post("/remove/{cid}")
+async def remove_from_calendar(cid):
+	query = CalendarContent.update(recipe_id = None, content = None) \
+		.where(CalendarContent.id == cid).limit(1)
+	query.execute()
+
+	return True
